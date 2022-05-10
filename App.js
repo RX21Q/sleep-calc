@@ -1,14 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Sleep Calculator v0.1</Text>
-      <StatusBar style="auto" />
+      <View style={styles.countContainer}>
+        <Text>Count:</Text>
+      </View>
+      <TouchableOpacity
+        style={styles.button}
+      >
+        <Text>Press Here</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
