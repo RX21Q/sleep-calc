@@ -1,16 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ImageBackground } from 'react-native';
+
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.countContainer}>
-        <Text>Count:</Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button}
-      >
-        <Text>Press Here</Text>
+      <ImageBackground style={styles.background} source={require('./assets/background.png')}>
+      </ImageBackground>
+      <Text>Set Desired Wake Up Time</Text>
+      <TouchableOpacity style={styles.buttonOne}>
+        <Text>When Should I Go to Sleep?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonTwo}>
+        <Text>When should I Wake Up?</Text>
       </TouchableOpacity>
     </View>
   );
@@ -19,8 +22,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#E5E5E5',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  background: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  }
 });
