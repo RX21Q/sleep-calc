@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, ImageBackground, Button, Alert, } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 export default function App() {
@@ -15,30 +15,37 @@ export default function App() {
     let seconds = (today.getSeconds() < 10 ? '0' : '') + today.getSeconds();
     return hours + ':' + minutes + ':' + seconds;
   }
+  let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()]
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const d = new Date();
+  let monthName = months[d.getMonth()];
+  var dateOfMonth = new Date().getDate();
+  var year = new Date().getFullYear(); 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground style={styles.background} source={require('./assets/background.png')}>
       </ImageBackground>
-      <Text style={styles.timeText}>{'Current time'} - {time}</Text>
-      <Text style={styles.instOneTxt}> Desired Wake Up Time:</Text>
-      <TouchableOpacity style={styles.buttonOne}>
-        <Text style={styles.buttonOneTxt}>Calculate Optimal Bedtimes</Text>
-      </TouchableOpacity>
+      <Text style={styles.timeText}>{time}</Text>
+      <Text style={styles.dateText}>{weekday}, {monthName} {dateOfMonth}, {year}</Text>
+      <Text style={styles.instOneTxt}>Desired Wake Up Time:</Text>
+      <Button
+        style={styles.buttonOne}
+        title="Calculate Optimal Bedtimes"
+        onPress={() => Alert.alert('Simple Button pressed')}/>
       <Text style={styles.instTwoTxt}>If you're going to bed now</Text>
-      <TouchableOpacity style={styles.buttonTwo}>
-        <Text style={styles.buttonTwoTxt}>When should I Wake Up?</Text>
-      </TouchableOpacity>
-    </View>
+      <Button
+        style={styles.buttonTwo}
+        title="When Should I Wake Up?"
+        onPress={() => Alert.alert('Simple Button pressed')}/>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E5E5E5',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'Roboto',
   },
   background: {
     position: 'absolute',
@@ -53,10 +60,38 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
     fontWeight: 'bold',
   },
-  buttonOneTxt: {
+  instTwoTxt: {
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    color: 'white'
+  },
+  buttonOne: {
     color: 'white',
   },
-  buttonTwoTxt: {
-    color: 'black'
+  buttonTwo: {
+    color: 'black',
+  },
+  timeText: {
+    fontSize: 35,
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    position: 'absolute',
+    height: '92%',
+  },
+  dateText: {
+    fontSize: 20,
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    position: 'absolute',
+    height: '78%',
+    
+  },
+  '*': {
+    fontFamily: 'Roboto',
   },
 });
