@@ -8,6 +8,8 @@ export default function App() {
   useEffect(() => {
     let time = getCurrentTime();
     setTime(time);
+    setInterval(() => {setTime(time);
+    }, 1000);
   }, []);
   const getCurrentTime = () => {
     let today = new Date();
@@ -44,6 +46,8 @@ export default function App() {
   const showTimepicker = () => {
     showMode('time');
   };
+  let dateStr = date.toLocaleString();
+  let slicedDateStr = dateStr.slice(10,16)
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground style={styles.background} source={require('./assets/background.png')}>
@@ -51,8 +55,14 @@ export default function App() {
       <Text style={styles.timeText}>{time} {ampm}</Text>
       <Text style={styles.dateText}>{weekday}, {monthName} {dateOfMonth}, {year}</Text>
       <View style={styles.break}/>
-      <View><Button onPress={showTimepicker} title="Show time picker!"/></View>
-      <Text>selected: {date.toLocaleString()}</Text>
+      <Text style={styles.instOneTxt}>Please set your{'\n'}desired wake up time:</Text>
+      <Text style={styles.selectedTime}>SELECTED TIME -{slicedDateStr}</Text>
+      <TouchableOpacity
+          style={styles.buttonOne}
+          onPress={showTimepicker}
+          uppercase={false}>
+         <Text style={styles.buttonOneTxt}>    Change Time    </Text>
+       </TouchableOpacity>
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -62,16 +72,20 @@ export default function App() {
           onChange={onChange}
         />
       )}
-      <Text style={styles.instOneTxt}>Desired Wake Up Time:</Text>
-      <Button
-        style={styles.buttonOne}
-        title="Calculate Optimal Bedtimes"
-        onPress={() => Alert.alert('Simple Button pressed')}/>
+      <TouchableOpacity
+          style={styles.buttonTwo}
+          onPress={() => Alert.alert('Simple Button1 pressed')}
+          uppercase={false}>
+         <Text style={styles.buttonTwoTxt}>Calculate Optimal Bedtimes</Text>
+         </TouchableOpacity>
+      <View style={styles.breakTwo}/>
       <Text style={styles.instTwoTxt}>If you're going to bed now</Text>
-      <Button
-        style={styles.buttonTwo}
-        title="When Should I Wake Up?"
-        onPress={() => Alert.alert('Simple Button pressed')}/>
+      <TouchableOpacity
+          style={styles.buttonThree}
+          onPress={() => Alert.alert('Simple Button1 pressed')}
+          uppercase={false}>
+         <Text style={styles.buttonThreeTxt}>When Should I Wake Up?</Text>
+         </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -93,19 +107,48 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
-    fontWeight: 'bold',
+    textAlign: 'center',
+    bottom: '10%',
   },
   instTwoTxt: {
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
-    color: 'white'
+    color: 'white',
+  },
+  selectedTime: {
+    fontSize: 26,
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    bottom: '6%'
   },
   buttonOne: {
+    alignItems: 'center',
+    backgroundColor: '#119AD4',
+    padding: 10,
+    textTransform: 'lowercase',
+  },
+  buttonOneTxt: {
     color: 'white',
   },
   buttonTwo: {
-    color: 'black',
+    alignItems: 'center',
+    backgroundColor: '#0F0F0F',
+    padding: 10,
+    textTransform: 'lowercase',
+  },
+  buttonTwoTxt: {
+    color: 'white'
+  },
+  buttonThree: {
+    alignItems: 'center',
+    backgroundColor: '#D7DA3D',
+    padding: 10,
+    textTransform: 'lowercase',
   },
   timeText: {
     fontSize: 32,
@@ -126,12 +169,20 @@ const styles = StyleSheet.create({
     top: '6%',
   },
   break: {
-  borderBottomColor: 'black',
-  borderBottomWidth: 2,
-  alignSelf: 'auto',
-  width: '75%',
-  justifyContent: 'center',
-  bottom: '21%',
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
+    alignSelf: 'auto',
+    width: '75%',
+    justifyContent: 'center',
+    bottom: '14%',
+  },
+  breakTwo: {
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
+    alignSelf: 'auto',
+    width: '75%',
+    justifyContent: 'center',
+    top: '5%'
   },
   '*': {
     fontFamily: 'Roboto',
