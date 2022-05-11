@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     paddingLeft: 37,
     paddingRight: 37,
     borderRadius: 7.5,
-    top: '3%',
+    top: '2%',
   },
   buttonTwoTxt: {
     color: 'white',
