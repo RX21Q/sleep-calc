@@ -118,10 +118,12 @@ export default StyleSheet.create({
     bottom: 0,
   },
   navBar: {
+    position: "absolute",
     flexDirection: "row",
     backgroundColor: "#36454F",
     width: "100%",
     justifyContent: "space-evenly",
+    bottom: 0,
   },
   iconBehave: {
     padding: 14,
